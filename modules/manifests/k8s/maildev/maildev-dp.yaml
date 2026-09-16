@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maildev-dp
+  namespace: zemechanics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maildev-dp
+  template:
+    metadata:
+      labels:
+        app: maildev-dp
+    spec:
+      containers:
+        - name: maildev-container
+          image: maildev/maildev
+          ports:
+            - containerPort: 1025
+            - containerPort: 1080

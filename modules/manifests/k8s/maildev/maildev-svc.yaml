@@ -1,0 +1,20 @@
+# NodePort na porta 1080 (web UI) pra você conseguir abrir os e-mails
+# recebidos em http://localhost:30081, igual ao fluxo descrito no README
+# (que hoje usa http://localhost:1080 via docker-compose).
+apiVersion: v1
+kind: Service
+metadata:
+  name: maildev-svc
+  namespace: zemechanics
+spec:
+  type: NodePort
+  selector:
+    app: maildev-dp
+  ports:
+    - name: smtp
+      port: 1025
+      targetPort: 1025
+    - name: web-ui
+      port: 1080
+      targetPort: 1080
+      nodePort: 30081
